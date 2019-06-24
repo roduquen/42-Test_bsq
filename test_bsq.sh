@@ -1,5 +1,4 @@
 #!/bin/sh
-
 i=1
 chmod 744 bsq bsq_test generator.pl generator2.pl generator3.pl
 rm -f test
