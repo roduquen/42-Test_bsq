@@ -34,6 +34,36 @@ then
 	i=$(($i + 1))
 fi
 rm -rf dir
+echo "4.ox\n\n\n\n\n" > test
+./bsq_test test > other_bsq_test
+./bsq test > my_bsq
+diff my_bsq other_bsq_test > delete
+if [ $? == 1 ]
+then
+	echo "il y a une erreur avec le test enregistre dans test $i"
+	mkdir -p error_file_$i
+	cp test ./error_file_$i/map_before_program
+	cp delete ./error_file_$i/diff_between_output
+	cp other_bsq_test error_file_$i/bsq_test_result
+	cp my_bsq error_file_$i/my_bsq_result
+	i=$(($i + 1))
+fi
+./generator.pl 100 100 50 > testasuppr
+echo -n `cat testasuppr` > test
+rm -rf testasuppr
+./bsq_test test > other_bsq_test
+./bsq test > my_bsq
+diff my_bsq other_bsq_test > delete
+if [ $? == 1 ]
+then
+	echo "il y a une erreur avec le test enregistre dans test $i"
+	mkdir -p error_file_$i
+	cp test ./error_file_$i/map_before_program
+	cp delete ./error_file_$i/diff_between_output
+	cp other_bsq_test error_file_$i/bsq_test_result
+	cp my_bsq error_file_$i/my_bsq_result
+	i=$(($i + 1))
+fi
 while [ true ]
 do
 	./generator.pl 100 100 50 > test
